@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { insforge } from '../lib/insforge';
-import { Search, UserPlus, Building2, Mail, Hash } from 'lucide-react';
+import { Search, UserPlus, Mail, Hash } from 'lucide-react';
 
 interface Employee {
     id: number;
@@ -22,7 +22,7 @@ const Directory: React.FC<{ onAdd: () => void }> = ({ onAdd }) => {
 
     const fetchEmployees = async () => {
         setLoading(true);
-        const { data, error } = await insforge.database
+        const { data, error: _error } = await insforge.database
             .from('employees')
             .select('*')
             .order('created_at', { ascending: false });

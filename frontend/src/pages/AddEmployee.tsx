@@ -18,7 +18,7 @@ const AddEmployee: React.FC<{ onBack: () => void, onSuccess: () => void }> = ({ 
         setLoading(true);
         setError(null);
 
-        const { data, error: apiError } = await insforge.database
+        const { data: _data, error: apiError } = await insforge.database
             .from('employees')
             .insert([formData])
             .select();
