@@ -2,9 +2,15 @@ services:
   - type: web
     name: ethra-backend
     env: python
-    rootDirectory: backend
+    plan: free
+    rootDir: backend
     buildCommand: pip install -r requirements.txt
-    startCommand: alembic upgrade head && gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app
+    startCommand: >
+      alembic upgrade head &&
+      gunicorn app.main:app
+      -k uvicorn.workers.UvicornWorker
+      --workers 2
+      --bind 0.0.0.0:$PORT
     envVars:
       - key: DATABASE_URL
         fromDatabase:
